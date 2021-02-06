@@ -18,8 +18,9 @@ enum {
 	PW_3,
 	PW_4,
 	PW_5,
-	PW_6,
 };
+
+// Layout: http://www.keyboard-layout-editor.com/#/gists/be93346f76d04119b2444437a7243970
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [BASIS] = LAYOUT( \
@@ -84,10 +85,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
 			case PW_5:
 				SEND_STRING(PWD5 SS_TAP(X_ENTER));
-				break;
-
-			case PW_6:
-				SEND_STRING(PWD6 SS_TAP(X_ENTER));
 				break;
 		}
 	}
