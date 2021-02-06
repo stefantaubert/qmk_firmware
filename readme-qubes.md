@@ -38,6 +38,18 @@ python3.8 -m pipenv sync --dev
 pipenv run ./bin/qmk compile -kb ergodash/rev1 -km default
 ```
 
+## update fork master
+
+```sh
+git checkout master
+git fetch upstream
+git pull upstream master
+git push origin master
+git checkout dev
+git merge master
+git push
+```
+
 # firmware programming on other qube
 
 ## setup
@@ -53,7 +65,7 @@ python3.8 -m pipenv sync
 pipenv run ./bin/qmk compile -kb ergodash/rev1 -km default
 ```
 
-## prepare firmare stefan_v3
+## prepare firmare ErgoDash stefan_v3
 
 ```sh
 # creates or overwrites
@@ -66,9 +78,29 @@ cat > ./keyboards/ergodash/rev1/keymaps/stefan_v3/passwords.h << EOF
 EOF
 ```
 
-## update firmare stefan_v3
+## update firmare ErgoDash stefan_v3
 
 ```sh
 git pull; pipenv run ./bin/qmk compile -kb ergodash/rev1 -km stefan_v3
 pipenv run ./bin/qmk flash -kb ergodash/rev1 -km stefan_v3
+```
+
+## prepare firmare GH60 stefan
+
+```sh
+# creates or overwrites
+cat > ./keyboards/gh60/satan/keymaps/stefan/passwords.h << EOF
+#define PWD1 ""
+#define PWD2 ""
+#define PWD3 ""
+#define PWD4 ""
+#define PWD5 ""
+EOF
+```
+
+## update firmare GH60 stefan
+
+```sh
+git pull; pipenv run ./bin/qmk compile -kb gh60/satan -km stefan
+pipenv run ./bin/qmk flash -kb gh60/satan -km stefan
 ```

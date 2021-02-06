@@ -1,0 +1,120 @@
+#include QMK_KEYBOARD_H
+#include <sendstring_german.h>
+#include <passwords.h>
+
+
+enum {
+	// Standardebene
+	BASIS = 0,
+
+	// Sonderzeichen
+	LAYER1,
+
+	// Numpad & Shortcuts
+	LAYER2,
+
+	// Pfeiltasten
+	LAYER3,
+
+	// Konfiguration
+	I3_LAYER,
+
+	// Gaming
+	QWERTZ_LAYER
+};
+
+//enum {
+//    QUBE_COPY = 0,
+//	QUBE_PASTE
+//};
+
+//qk_tap_dance_action_t tap_dance_actions[] = {
+//    [QUBE_COPY] = ACTION_TAP_DANCE_DOUBLE(LCTL(KC_C), LSFT(LCTL(KC_C))),
+//    [QUBE_PASTE] = ACTION_TAP_DANCE_DOUBLE(LCTL(KC_V), LSFT(LCTL(KC_V)))
+//};
+
+enum {
+	PW_1 = SAFE_RANGE,
+	PW_2,
+	PW_3,
+	PW_4,
+	PW_5,
+};
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+	if (record->event.pressed) {
+		switch(keycode) {
+			case PW_1:
+				SEND_STRING(PWD1 SS_TAP(X_ENTER));
+				break;
+
+			case PW_2:
+				SEND_STRING(PWD2 SS_TAP(X_ENTER));
+				break;
+
+			case PW_3:
+				SEND_STRING(PWD3 SS_TAP(X_ENTER));
+				break;
+
+			case PW_4:
+				SEND_STRING(PWD4 SS_TAP(X_ENTER));
+				break;
+
+			case PW_5:
+				SEND_STRING(PWD5 SS_TAP(X_ENTER));
+				break;
+		}
+	}
+
+  	return true;
+};
+
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+	[BASIS] = LAYOUT_60_iso(
+		KC_ESC, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5, KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, KC_F12, KC_BSPACE,
+		KC_TAB, KC_K, KC_U, KC_LBRACKET, KC_DOT, KC_QUOTE, KC_V, KC_G, KC_C, KC_L, KC_J, KC_F, KC_DEL,
+		MO(LAYER1), KC_H, KC_I, KC_E, KC_A, KC_O, KC_D, KC_T, KC_R, KC_N, KC_S, KC_MINUS, MO(LAYER1), KC_ENT,
+		KC_LSHIFT, MO(LAYER2), KC_X, KC_Z, KC_SCOLON, KC_COMMA, KC_Q, KC_B, KC_P, KC_W, KC_M, KC_Y, KC_RSHIFT,
+		KC_LCTRL, MO(I3_LAYER), KC_LALT, KC_SPACE, MO(LAYER3), MO(I3_LAYER), TT(QWERTZ_LAYER), KC_RCTRL
+  	),
+
+	[LAYER1] = LAYOUT_60_iso(
+		_______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+		_______, UC(0x2026), KC_QUESTION, ALGR(KC_8), ALGR(KC_9), KC_GRAVE, KC_EXCLAIM, KC_NONUS_BSLASH, LSFT(KC_NONUS_BSLASH), KC_RIGHT_PAREN, KC_CIRCUMFLEX, ALGR(KC_E), KC_TILDE,
+		_______, ALGR(KC_MINUS), KC_AMPERSAND, ALGR(KC_7), ALGR(KC_0), KC_RIGHT_CURLY_BRACE, KC_UNDERSCORE, KC_ASTERISK, KC_LEFT_PAREN, KC_SLASH, KC_RIGHT_ANGLE_BRACKET, ALGR(KC_Q), _______, _______,
+		_______, XXXXXXX, KC_NONUS_HASH, KC_DOLLAR, ALGR(KC_NONUS_BSLASH), ALGR(KC_RBRACKET), KC_PLUS, KC_RBRACKET, KC_PERCENT, KC_AT, LSFT(KC_NONUS_HASH), KC_LEFT_ANGLE_BRACKET, _______,
+		_______, XXXXXXX, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX, _______
+  	),
+
+	[LAYER2] = LAYOUT_60_iso(
+		_______, PW_1, PW_2, PW_3, PW_4, PW_5, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+		_______, XXXXXXX, XXXXXXX, LCTL(LSFT(KC_C)), LCTL(LSFT(KC_V)), XXXXXXX, KC_KP_SLASH, KC_7, KC_8, KC_9, KC_RBRACKET, KC_SLASH, KC_RIGHT_PAREN,
+		XXXXXXX, XXXXXXX, LCTL(KC_Z), LCTL(KC_Y), LCTL(KC_A), XXXXXXX, KC_KP_ASTERISK, KC_4, KC_5, KC_6, KC_COMMA, KC_DOT, XXXXXXX, _______,
+		_______, _______, LCTL(KC_S), LCTL(KC_X), LCTL(KC_C), LCTL(KC_V), XXXXXXX, XXXXXXX, KC_1, KC_2, KC_3, XXXXXXX, _______,
+		_______, XXXXXXX, _______, KC_0, XXXXXXX, XXXXXXX, XXXXXXX, _______
+  	),
+
+	[LAYER3] = LAYOUT_60_iso(
+		_______, _______, _______, _______, _______, _______, _______, _______, KC_MEDIA_PLAY_PAUSE, KC_MEDIA_PREV_TRACK, KC_MEDIA_NEXT_TRACK, KC_AUDIO_VOL_DOWN, KC_AUDIO_VOL_UP, _______,
+		_______, KC_PGUP, KC_PGDOWN, KC_UP, KC_DEL, KC_BSPACE, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+		XXXXXXX, KC_HOME, KC_LEFT, KC_DOWN, KC_RIGHT, KC_END, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+		_______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+		_______, XXXXXXX, _______, KC_SPACE, _______, XXXXXXX, XXXXXXX, _______
+  	),
+
+	[I3_LAYER] = LAYOUT_60_iso(
+		G(S(KC_E)), G(S(KC_C)), G(S(KC_R)), XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, G(KC_0), XXXXXXX, XXXXXXX, G(KC_F), XXXXXXX, RESET,
+		XXXXXXX, XXXXXXX, G(KC_SPACE), G(KC_UP), G(KC_A), XXXXXXX, XXXXXXX, G(KC_7), G(KC_8), G(KC_9), G(KC_H), XXXXXXX, XXXXXXX,
+		XXXXXXX, G(S(KC_Q)), G(KC_LEFT), G(KC_DOWN), G(KC_RIGHT), G(KC_R), XXXXXXX, G(KC_4), G(KC_5), G(KC_6), G(KC_D), XXXXXXX, XXXXXXX, G(KC_ENTER),
+		XXXXXXX, XXXXXXX, XXXXXXX, G(KC_S), G(KC_W), G(KC_E), XXXXXXX, XXXXXXX, G(KC_1), G(KC_2), G(KC_3), G(KC_V), XXXXXXX,
+		XXXXXXX, _______, XXXXXXX, KC_LSHIFT, XXXXXXX, _______, XXXXXXX, XXXXXXX
+  	),
+
+	[QWERTZ_LAYER] = LAYOUT_60_iso(
+		KC_ESC, KC_1, KC_2, KC_3, KC_4, KC_5, KC_6, KC_7, KC_8, KC_9, KC_0, KC_MINUS, KC_EQUAL, KC_BSPACE,
+		KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_LBRACKET, KC_RBRACKET,
+		KC_CAPSLOCK, KC_A, KC_S, KC_D, KC_F, KC_G, KC_H, KC_J, KC_K, KC_L, KC_SCOLON, KC_QUOTE, KC_NONUS_HASH, KC_ENTER,
+		KC_LSHIFT, KC_NONUS_BSLASH, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_N, KC_M, KC_COMMA, KC_DOT, KC_SLASH, KC_RSHIFT,
+		KC_LCTRL, KC_LGUI, KC_LALT, KC_SPACE, KC_RALT, KC_RGUI, KC_MENU, KC_RCTRL
+  	)
+};

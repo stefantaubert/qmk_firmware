@@ -20,7 +20,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-
+// first try this: https://github.com/tmk/tmk_keyboard/wiki/FAQ#nkro-doesnt-work
+// then this: https://beta.docs.qmk.fm/developing-qmk/qmk-reference/config_options#features-that-can-be-enabled
 #define FORCE_NKRO
 
 /* Use I2C or Serial, not both */
