@@ -60,7 +60,7 @@ doxygen/
 .tags
 
 # ignore image files
-*.png
+# *.png
 *.gif
 *.jpg
 
