@@ -47,6 +47,7 @@ git pull upstream master
 git push origin master
 git checkout dev
 git merge master
+# :q
 git push
 ```
 
