@@ -1,0 +1,27 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+appdirs = "*"
+argcomplete = "*"
+colorama = "*"
+hjson = "*"
+milc = "*"
+Pygments = "*"
+
+[dev-packages]
+appdirs = "*"
+argcomplete = "*"
+colorama = "*"
+hjson = "*"
+milc = "*"
+nose2 = "*"
+flake8 = "*"
+pep8-naming = "*"
+yapf = "*"
+Pygments = "*"
+
+[requires]
+python_version = "3.8"
