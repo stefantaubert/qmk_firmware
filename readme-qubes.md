@@ -103,6 +103,7 @@ EOF
 ## update firmare GH60 stefan
 
 ```sh
+cd qmk_firmware
 git pull; pipenv run ./bin/qmk compile -kb gh60/satan -km stefan
 pipenv run ./bin/qmk flash -kb gh60/satan -km stefan
 git pull; pipenv run ./bin/qmk compile -kb gh60/satan -km stefan_iso
