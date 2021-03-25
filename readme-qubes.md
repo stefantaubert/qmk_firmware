@@ -64,6 +64,7 @@ python3.8 -m pip install pipenv --user
 python3.8 -m pipenv sync
 # check
 pipenv run ./bin/qmk compile -kb ergodash/rev1 -km default
+pipenv run ./bin/qmk compile -kb gh60/satan -km stefan_iso
 ```
 
 ## prepare firmare ErgoDash stefan_v3
@@ -104,4 +105,6 @@ EOF
 ```sh
 git pull; pipenv run ./bin/qmk compile -kb gh60/satan -km stefan
 pipenv run ./bin/qmk flash -kb gh60/satan -km stefan
+git pull; pipenv run ./bin/qmk compile -kb gh60/satan -km stefan_iso
+pipenv run ./bin/qmk flash -kb gh60/satan -km stefan_iso
 ```
